@@ -1,6 +1,6 @@
-# ESP32 NTP Clock
+# ESP32 HC Sensor with NOW protocol
 
-A simple clock that displays the time and date on an LCD1602 display. The time is synced via NTP.
+It is the challenge-1 project for Internet of Things course (2025/2026) in PoliMi. 
 
 Use [Wokwi](https://marketplace.visualstudio.com/items?itemName=wokwi.wokwi-vscode) to simulate this project.
 
@@ -15,3 +15,4 @@ pio run
 ## Simulate the project
 
 To simulate this project, install [Wokwi for VS Code](https://marketplace.visualstudio.com/items?itemName=wokwi.wokwi-vscode). Open the project directory in Visual Studio Code, press **F1** and select "Wokwi: Start Simulator".
+
