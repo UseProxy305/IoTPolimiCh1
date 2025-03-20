@@ -36,15 +36,6 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   esp_deep_sleep_start();
 }
 
-// Callback func after receiving a data
-void OnDataRecv(const uint8_t * mac, const uint8_t *data, int len) {
-  Serial.print("Message received: ");
-  char receivedString[len];
-  memcpy(receivedString, data, len);
-  Serial.println(String(receivedString));
-}
-
-
 void setup () {
   String message = "";
   unsigned long distance_cm;
@@ -52,15 +43,14 @@ void setup () {
   Serial.begin(115200);
   pinMode(PIN_TRIG, OUTPUT);
   pinMode(PIN_ECHO, INPUT);
-
+  
   // Getting data from sensor
   // Start a new measurement:
   digitalWrite(PIN_TRIG, HIGH);
   delayMicroseconds(10);
   digitalWrite(PIN_TRIG, LOW);
-  
-  // Read the result:
 
+  // Read the result:
   distance_cm = (pulseIn(PIN_ECHO, HIGH) / 58);
   
   Serial.print("Distance in CM: ");
@@ -92,7 +82,7 @@ void setup () {
     esp_deep_sleep_start();
   }
 #endif /* OPTIMIZE_SENDING_FREQUENCY */
-  
+
   WiFi.mode(WIFI_STA);
   WiFi.setTxPower(WIFI_POWER_2dBm);
   esp_now_init();
@@ -110,9 +100,6 @@ void setup () {
     return;
   }
 
-  esp_now_send(broadcastAddress, (uint8_t*)message.c_str(), message.length() + 1);
-  esp_sleep_enable_timer_wakeup(DUTY_CYCYLE_X * uS_TO_S);
-
 }
 
 void loop () {
@@ -126,11 +113,12 @@ void loop () {
 // 4) Transmission : esp_send_now to deep_sleep
 
 #if 0
+// Time Interval measurements
 uint32_t startTime;
 uint32_t endTime;
 startTime = micros();
 endTime = micros();
-Serial.print("Initial Function takes in ms ");
+Serial.print("Function takes in ms ");
 Serial.print(endTime-startTime);
 Serial.println("");
 #endif // 0
